@@ -1,0 +1,309 @@
+int main()
+{
+    int y;
+    int z;
+    OutputFile.open("OUTPUTFILE.TXT");
+    int x=0;
+    cout<<"Welcome to the game of life!" << endl;
+    cout<<"Would you like to: "<<endl<<"(1)Use a file for the input"<<endl<<"(2) Use a randomly generated game"<<endl;
+    cout<<"Please enter the number 1 or 2"<<endl;
+    cin>>x;
+    //dont even look at file route or populatefilearray because that is wrong
+    while (x<1 || x>2||cin.fail())
+    {
+        cin.clear();
+        cin.ignore(256,'\n');
+        cout<<"You entered an invalid input. Please push (1) or (2). Then click enter"<<endl;
+        cin>>x;
+    }
+    //for z=1 and x=2 they are the same code but with random route replaced with fileroute, both generate and populate an array
+    if (x==1)
+    {
+        cout<<"What mode would you like to play: "<<endl<<"(1) Classic Mode"<<endl<<"(2) Mirror Mode"<<endl<<"(3) Donut Mode"<<endl;
+        cin>>z;
+        while (z<1 || z>3||cin.fail())
+        {
+            cin.clear();
+            cin.ignore(256,'\n');
+            cout<<"You entered an invalid input. Please push (1) or (2) or (3) . Then click enter"<<endl;
+            cin>>z;
+        }
+
+        //******************************CLASSIC MODE*******************************
+        if (z==1)
+        {
+            cout<<"Would you like to: "<<endl<<"(1) Pause between generations "<<endl<<"(2) Out the generations to a file called OUTPUT.txt"<<endl;
+            cin>>y;
+            while (y<1||y>2||cin.fail())
+            {
+                cin.clear();
+                cin.ignore(256,'\n');
+                cout<<"You entered an invalid input. Please push (1) or (2). Then click enter"<<endl;
+                cin>>y;
+            }
+            FileRoute();
+
+            if (y==1)
+            {
+                PrintArraySlow();
+                while(IsEqual==false&&AllZeros==false)
+                {
+                    CornerChecker();
+                    EdgeChecker();
+                    MiddleChecker();
+                    PrintTempArray();
+                    Switcheroo();
+                    EqualChecker();
+                }
+            }
+            if (y==2)
+            {
+
+                FirstArrayFileOut();
+                while(IsEqual==false&&AllZeros==false&&GenerationCount<5000)
+                {
+                    CornerChecker();
+                    EdgeChecker();
+                    MiddleChecker();
+                    PrintToFile();
+                    Switcheroo();
+                    FileEqualChecker();
+                }
+                cout<<"It has been written to the file"<<endl;
+
+            }
+        }
+
+        //*************************MIRROR MODE********************************
+        if (z==2)
+        {
+            cout<<"Would you like to:"<<endl<<"(1) Pause between generations "<<endl<<"(2) Out the generations to a file called OUTPUT.txt"<<endl;
+            cin>>y;
+            while (y<1||y>2||cin.fail())
+            {
+                cin.clear();
+                cin.ignore(256,'\n');
+                cout<<"You entered an invalid input. Please push (1) or (2). Then click enter"<<endl;
+                cin>>y;
+            }
+            FileRoute();
+            if (y==1)
+            {
+                PrintArraySlow();
+                while(IsEqual==false&&AllZeros==false)
+                {
+                    MirrorCornerChecker();
+                    MirrorEdgeChecker();
+                    MiddleChecker();
+                    PrintTempArray();
+                    Switcheroo();
+                    EqualChecker();
+                }
+            }
+            if (y==2)
+            {
+                FirstArrayFileOut();
+                while(IsEqual==false&&AllZeros==false&&GenerationCount<5000)
+                {
+                    MirrorCornerChecker();
+                    MirrorEdgeChecker();
+                    MiddleChecker();
+                    PrintToFile();
+                    Switcheroo();
+                    FileEqualChecker();
+                }
+                cout<<"It has been written to the file"<<endl;
+            }
+        }
+        //***************************************DONUT MODE*************************************
+        if (z==3)
+        {
+            cout<<"Would you like to:"<<endl<<"(1) Pause between generations "<<endl<<"(2) Out the generations to a file called OUTPUT.txt"<<endl;
+            y=0;
+            cin>>y;
+            while (y<1||y>2||cin.fail())
+            {
+                cin.clear();
+                cin.ignore(256,'\n');
+                cout<<"You entered an invalid input. Please push (1) or (2). Then click enter"<<endl;
+                cin>>y;
+            }
+            FileRoute();
+            if (y==1)
+            {
+                PrintArraySlow();
+                while(IsEqual==false&&AllZeros==false)
+                {
+                    DonutCornerChecker();
+                    DonutEdgeChecker();
+                    MiddleChecker();
+                    PrintTempArray();
+                    Switcheroo();
+                    EqualChecker();
+                }
+            }
+            if (y==2)
+            {
+                FirstArrayFileOut();
+                while(IsEqual==false&&AllZeros==false&&GenerationCount<5000)
+                {
+                    DonutCornerChecker();
+                    DonutEdgeChecker();
+                    MiddleChecker();
+                    PrintToFile();
+                    Switcheroo();
+                    FileEqualChecker();
+                }
+                cout<<"It has been written to the file"<<endl;
+
+            }
+        }
+
+
+
+    }
+    if (x==2)
+    {
+        cout<<"What mode would you like to play: "<<endl<<"(1) Classic Mode"<<endl<<"(2) Mirror Mode"<<endl<<"(3) Donut Mode"<<endl;
+        cin>>z;
+        while (z<1 || z>3||cin.fail())
+        {
+            cin.clear();
+            cin.ignore(256,'\n');
+            cout<<"You entered an invalid input. Please push (1) or (2) or (3) . Then click enter"<<endl;
+            cin>>z;
+        }
+
+        //******************************CLASSIC MODE*******************************
+        if (z==1)
+        {
+            cout<<"Would you like to: "<<endl<<"(1) Pause between generations "<<endl<<"(2) Out the generations to a file called OUTPUT.txt"<<endl;
+            cin>>y;
+            while (y<1||y>2||cin.fail())
+            {
+                cin.clear();
+                cin.ignore(256,'\n');
+                cout<<"You entered an invalid input. Please push (1) or (2). Then click enter"<<endl;
+                cin>>y;
+            }
+            RandomRoute();
+
+            if (y==1)
+            {
+                PrintArraySlow();
+                while(IsEqual==false&&AllZeros==false)
+                {
+                    CornerChecker();
+                    EdgeChecker();
+                    MiddleChecker();
+                    PrintTempArray();
+                    Switcheroo();
+                    EqualChecker();
+                }
+            }
+            if (y==2)
+            {
+
+                FirstArrayFileOut();
+                while(IsEqual==false&&AllZeros==false&&GenerationCount<5000)
+                {
+                    CornerChecker();
+                    EdgeChecker();
+                    MiddleChecker();
+                    PrintToFile();
+                    Switcheroo();
+                    FileEqualChecker();
+                }
+                cout<<"It has been written to the file"<<endl;
+
+            }
+        }
+
+        //*************************MIRROR MODE********************************
+        if (z==2)
+        {
+            cout<<"Would you like to:"<<endl<<"(1) Pause between generations "<<endl<<"(2) Out the generations to a file called OUTPUT.txt"<<endl;
+            cin>>y;
+            while (y<1||y>2||cin.fail())
+            {
+                cin.clear();
+                cin.ignore(256,'\n');
+                cout<<"You entered an invalid input. Please push (1) or (2). Then click enter"<<endl;
+                cin>>y;
+            }
+            RandomRoute();
+            if (y==1)
+            {
+                PrintArraySlow();
+                while(IsEqual==false&&AllZeros==false)
+                {
+                    MirrorCornerChecker();
+                    MirrorEdgeChecker();
+                    MiddleChecker();
+                    PrintTempArray();
+                    Switcheroo();
+                    EqualChecker();
+                }
+            }
+            if (y==2)
+            {
+                FirstArrayFileOut();
+                while(IsEqual==false&&AllZeros==false&&GenerationCount<5000)
+                {
+                    MirrorCornerChecker();
+                    MirrorEdgeChecker();
+                    MiddleChecker();
+                    PrintToFile();
+                    Switcheroo();
+                    FileEqualChecker();
+                }
+                cout<<"It has been written to the file"<<endl;
+            }
+        }
+        //***************************************DONUT MODE*************************************
+        if (z==3)
+        {
+            cout<<"Would you like to:"<<endl<<"(1) Pause between generations "<<endl<<"(2) Out the generations to a file called OUTPUT.txt"<<endl;
+            y=0;
+            cin>>y;
+            while (y<1||y>2||cin.fail())
+            {
+                cin.clear();
+                cin.ignore(256,'\n');
+                cout<<"You entered an invalid input. Please push (1) or (2). Then click enter"<<endl;
+                cin>>y;
+            }
+            RandomRoute();
+            if (y==1)
+            {
+                PrintArraySlow();
+                while(IsEqual==false&&AllZeros==false)
+                {
+                    DonutCornerChecker();
+                    DonutEdgeChecker();
+                    MiddleChecker();
+                    PrintTempArray();
+                    Switcheroo();
+                    EqualChecker();
+                }
+            }
+            if (y==2)
+            {
+                FirstArrayFileOut();
+                while(IsEqual==false&&AllZeros==false&&GenerationCount<5000)
+                {
+                    DonutCornerChecker();
+                    DonutEdgeChecker();
+                    MiddleChecker();
+                    PrintToFile();
+                    Switcheroo();
+                    FileEqualChecker();
+                }
+                cout<<"It has been written to the file"<<endl;
+
+            }
+        }
+
+
+    }
+}
